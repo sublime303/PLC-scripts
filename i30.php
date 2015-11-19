@@ -7,8 +7,8 @@ echo "\ni30 Parser ver.080819   2do A/B Larm";
 #
 # 
 #
-# På digitala kort så är Digital OUT adresserna 21-32.
-# På analoga kort så är Analog OUT adresserna 61-68.
+# PÃ¥ digitala kort sÃ¥ Ã¤r Digital OUT adresserna 21-32.
+# PÃ¥ analoga kort sÃ¥ Ã¤r Analog OUT adresserna 61-68.
 #
 # 01 -> 16  DI
 # 21 -> 32  DO
@@ -18,7 +18,7 @@ echo "\ni30 Parser ver.080819   2do A/B Larm";
 #_______________________________________________________
 
 function kanaltyp($n){
-	#Hämtar kanaltyp för ett kanalnummer
+	#HÃ¤mtar kanaltyp fÃ¶r ett kanalnummer
 	$n="??"; #Om inget matchas
 	if ($n <= 16){ 				return "DI";}
 	if ($n >= 21 && $n <= 32){ 	return "DO";}
@@ -27,7 +27,7 @@ function kanaltyp($n){
 }
 
 
-if ($fd = fopen ("8908391.DEF", "r")){  # Öppna filen & loopa radvis
+if ($fd = fopen ("8908391.DEF", "r")){  # Ã–ppna filen & loopa radvis
 	while (!feof ($fd)){
 	    $line = fgets($fd, 4096);	$buff.=$line;
 	    $kommentar="";$typ="";
@@ -40,7 +40,7 @@ if ($fd = fopen ("8908391.DEF", "r")){  # Öppna filen & loopa radvis
 			$IOkanal = substr(trim("$found[0]"),0,2);
 			$typ=kanaltyp($IOkanal);
 			$IOnum = substr($IOsection,2)+$IOkanal; 		# strippa IO, addera integers	
-			$IOnum = str_pad($IOnum, 4, "0", STR_PAD_LEFT); #zero fill på 4 tecken
+			$IOnum = str_pad($IOnum, 4, "0", STR_PAD_LEFT); #zero fill pÃ¥ 4 tecken
 		
 			if (preg_match('/".+"/', $line,$match)) {
 				$kommentar=$match[0];
@@ -56,7 +56,7 @@ if ($fd = fopen ("8908391.DEF", "r")){  # Öppna filen & loopa radvis
 			$IOkanal = trim($found[0]);
 			#$nummer = substr($IOkanal,2);
 			$IOnum = substr($IOsection,2) + substr($IOkanal,2); # strippa IO, addera integers	
-			$IOnum = "AL".str_pad($IOnum, 4, "0", STR_PAD_LEFT); #zero fill på 4 tecken
+			$IOnum = "AL".str_pad($IOnum, 4, "0", STR_PAD_LEFT); #zero fill pÃ¥ 4 tecken
 			
 			if (preg_match('/".+"/', $line,$match)) {
 				$kommentar=$match[0];
